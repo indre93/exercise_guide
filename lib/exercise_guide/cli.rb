@@ -1,11 +1,11 @@
 class ExerciseGuide::CLI
 
   def start
-    puts "Welcome to the Exercise Guide App!".colorize(:yellow)
-    puts "Please type the muscle that you would like to exercise".colorize(:yellow)
-    puts "            -----------------".colorize(:yellow)
+    puts "Welcome to the Exercise Guide App!"
+    puts "Please type the muscle that you would like to exercise"
+    puts "            -----------------"
     puts ExerciseGuide::Scraper.scrape_body_parts
-    puts "            -----------------".colorize(:yellow)
+    puts "            -----------------"
 
     #list body parts
     #gets input
