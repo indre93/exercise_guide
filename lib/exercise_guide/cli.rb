@@ -1,5 +1,3 @@
-require 'colorize'
-
 class ExerciseGuide::CLI
 
   def start

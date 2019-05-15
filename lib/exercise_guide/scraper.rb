@@ -1,5 +1,3 @@
-require 'colorize'
-
 class ExerciseGuide::Scraper
 
     def self.scrape_body_parts
