@@ -1,5 +1,7 @@
 require 'nokogiri'
 require 'pry'
+require 'open-uri'
+
 
 require_relative "exercise_guide/version.rb"
 require_relative "exercise_guide/cli.rb"

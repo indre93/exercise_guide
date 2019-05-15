@@ -1,7 +1,8 @@
 class ExerciseGuide::Scraper
 
     def self.scrape_body_parts
-      doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/"))
+      doc = Nokogiri::HTML(open("https://bodybuilding.com/exercises"))
+      binding.pry
     end
 
     def self.scrape_exercises
@@ -10,3 +11,5 @@ class ExerciseGuide::Scraper
 
 
 end
+
+# ExerciseGuide::Scraper.scrape_body_parts
