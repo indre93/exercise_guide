@@ -1,0 +1,2 @@
+class ExerciseGuide::Scraper
+end
