@@ -5,6 +5,7 @@ class ExerciseGuide::CLI
     puts "Please type the muscle that you would like to exercise"
     puts "            -----------------"
     puts ExerciseGuide::Scraper.scrape_body_parts
+    #Make sure to only list muscle names - not muscle url
     puts "            -----------------"
 
     #list body parts
