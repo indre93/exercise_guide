@@ -4,6 +4,7 @@ class ExerciseGuide::CLI
     puts "Welcome to the Exercise Guide App!"
     puts "Type the muscle that you would like to exercise"
     puts "            -----------------"
+    ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
     puts "            -----------------"
     #gets input

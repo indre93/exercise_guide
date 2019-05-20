@@ -1,5 +1,5 @@
 class ExerciseGuide::BodyPart
-  attr_accessor :name, :muscle_url
+  attr_accessor :name, :body_part_url
 
   @@all = []
 

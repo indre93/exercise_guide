@@ -7,7 +7,7 @@ class ExerciseGuide::Scraper
       array_body_parts.each do |muscle|
         attributes = {
           name: muscle.css("a").children.text,
-          muscle_url: muscle.css("a").attribute("href").value
+          body_part_url: muscle.css("a").attribute("href").value
         }
 
         ExerciseGuide::BodyPart.new(attributes)
@@ -32,5 +32,5 @@ class ExerciseGuide::Scraper
 
 end
 
- ExerciseGuide::Scraper.scrape_body_parts
+# ExerciseGuide::Scraper.scrape_body_parts
 # ExerciseGuide::Scraper.scrape_exercises
