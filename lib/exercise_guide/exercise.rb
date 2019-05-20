@@ -1,9 +1,9 @@
 class ExerciseGuide::Exercise
-  attr_accessor :body_part, :muscle_url
+  attr_accessor :name, :muscle_url
 
   @@all = []
 
-  def initialize(attr_hash) #turns into objects
+  def initialize(attr_hash) #turns all attributes into objects
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
@@ -16,7 +16,7 @@ class ExerciseGuide::Exercise
   end
 
   def self.all #class method bc class is keeping track of data we want returned
-    @all
+    @@all
   end
 
 end

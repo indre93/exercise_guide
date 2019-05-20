@@ -2,10 +2,9 @@ class ExerciseGuide::CLI
 
   def start
     puts "Welcome to the Exercise Guide App!"
-    puts "Please type the muscle that you would like to exercise"
+    puts "Type the muscle that you would like to exercise"
     puts "            -----------------"
-    puts ExerciseGuide::Scraper.scrape_body_parts
-    #Make sure to only list muscle names - not muscle url
+    list_body_parts
     puts "            -----------------"
     #gets input
 
@@ -14,7 +13,9 @@ class ExerciseGuide::CLI
   end
 
   def list_body_parts
-    #list body parts that would like to exercise
+    ExerciseGuide::Exercise.all.each.with_index(1) do |body_part, index|
+      puts "#{index}. #{body_part.name}"
+    end
   end
 
   def list_exercises

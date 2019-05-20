@@ -4,13 +4,13 @@ class ExerciseGuide::Scraper
       doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/"))
 
       array_body_parts = doc.css("div.exercise-list li")
-      list = []
       array_body_parts.each do |muscle|
         attributes = {
-          body_part: muscle.css("a").children.text,
+          name: muscle.css("a").children.text,
           muscle_url: muscle.css("a").attribute("href").value
         }
-        exercise = ExerciseGuide::Exercise.new(attributes)
+
+        ExerciseGuide::Exercise.new(attributes)
       end
     end
 
