@@ -13,13 +13,17 @@ class ExerciseGuide::CLI
   end
 
   def list_body_parts
-    ExerciseGuide::Exercise.all.each.with_index(1) do |body_part, index|
+    ExerciseGuide::BodyPart.all.each.with_index(1) do |body_part, index|
       puts "#{index}. #{body_part.name}"
     end
   end
 
   def list_exercises
     #lists all exercises for that body part
+    ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
+      puts "#{index}. #{exercise.name}"
+    end
+
   end
 
 

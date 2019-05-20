@@ -10,7 +10,7 @@ class ExerciseGuide::Scraper
           muscle_url: muscle.css("a").attribute("href").value
         }
 
-        ExerciseGuide::Exercise.new(attributes)
+        ExerciseGuide::BodyPart.new(attributes)
       end
     end
 
