@@ -6,14 +6,12 @@ class ExerciseGuide::Scraper
       array_body_parts = doc.css("div.exercise-list li")
       list = []
       array_body_parts.each do |muscle|
-        scraped_hash = {
-          muscle_name: muscle.css("a").children.text,
+        attributes = {
+          body_part: muscle.css("a").children.text,
           muscle_url: muscle.css("a").attribute("href").value
         }
-        list << scraped_hash
+        exercise = ExerciseGuide::Exercise.new(attributes)
       end
-      list
-      binding.pry
     end
 
     def self.scrape_exercise_list
