@@ -1,8 +1,22 @@
 class ExerciseGuide::Exercise
-  attr_accessor :muscle_name, :muscle_url
+  attr_accessor :body_part, :muscle_url
 
-  def initialize(list)
+  @@all = []
 
+  def initialize(attr_hash) #turns into objects
+    attr_hash.each do |key, value|
+      self.send("#{key}=", value)
+    end
+    self.save
+  end
+
+  def save #returns the exercise instead of all the exercises
+    @@all << self
+    self
+  end
+
+  def self.all #class method bc class is keeping track of data we want returned
+    @all
   end
 
 end
