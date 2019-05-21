@@ -1,5 +1,4 @@
 class ExerciseGuide::CLI
-  attr_accessor :sorted_body_parts
 
   def start
     puts ""
@@ -32,9 +31,7 @@ class ExerciseGuide::CLI
     puts ""
   end
 
-  def sort_body_parts
-    @sorted_body_parts = ExerciseGuide::BodyPart.all.sort_by {|muscle| muscle.name}
-  end
+
 
   def list_body_parts
     puts "==> Please type the number of the body part that you would like to exercise:"
@@ -43,6 +40,26 @@ class ExerciseGuide::CLI
       puts "#{index}. #{body_part.name}"
     end
   end
+
+
+
+  def get_body_part_method
+    input = gets.strip
+    index = input.to_i - 1 # So we can get a number that is useful in an array
+    if index.between?(0,17)
+      muscle = ExerciseGuide::BodyPart.all[index]
+      puts "#{muscle.name}"
+      list_exercises
+        # list exercises that corresponds
+    elsif input == "exit"
+      # allow this method to end
+    else
+      puts "Oops! invalid input, please try again."
+      get_body_part_method
+    end
+  end
+
+
 
   def list_exercises
     puts "   *************************************"
@@ -56,6 +73,14 @@ class ExerciseGuide::CLI
     puts "==> Please type the number of the exercise for instructions:"
   end
 
+
+
+  def get_exercise_method
+
+  end
+
+
+
   def exercise_instructions
     ExerciseGuide::Instructions.all.each do |exercise|
       puts "    #{exercise.title}"
@@ -64,29 +89,6 @@ class ExerciseGuide::CLI
       puts ""
       puts "Click on the link to watch this exercise! ===> #{exercise.video.colorize(:blue)}"
     end
-  end
-
-  def get_body_part_method
-    input = gets.strip
-    index = input.to_i - 1 # So we can get a number that is useful in an array
-    if index.between?(0,17)
-      muscle = ExerciseGuide::BodyPart.all[index]
-      puts "#{muscle.name}"
-      list_exercises
-        #continue w program
-        #find that body part
-        #scrape - DONE
-        #list exercise that corresponds
-    elsif input == "exit"
-      #allow this method to end
-    else
-      puts "Oops! invalid input, please try again."
-      get_body_part_method
-    end
-  end
-
-  def get_exercise_method
-
   end
 
 end

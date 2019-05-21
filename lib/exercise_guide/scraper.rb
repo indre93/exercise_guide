@@ -2,9 +2,9 @@ class ExerciseGuide::Scraper
 
   def self.scrape_body_parts
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/"))
-    array = doc.css("div.exercise-list li")
+    array_of_muscles = doc.css("div.exercise-list li")
 
-    array.each do |muscle|
+    array_of_muscles.each do |muscle|
       attributes = {
         name: muscle.css("a").children.text,
         body_part_link: muscle.css("a").attribute("href").value
@@ -13,11 +13,11 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_exercises
+  def self.scrape_exercises(muscle) #need to open "muscle.body_part_link" instead of below link used
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/muscle/shoulders"))
-    array = doc.css("div.ExResult-row")
+    array_of_exercises = doc.css("div.ExResult-row")
 
-    array.each do |exercise|
+    array_of_exercises.each do |exercise|
       attributes = {
         exercise_title: exercise.css(".ExHeading").text.strip,
         equipment_type: exercise.css(".ExResult-equipmentType").text.strip.gsub(/\s+/,' '),
@@ -28,7 +28,7 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_instructions
+  def self.scrape_instructions(exercise) #need to open "exercise.link" instead of below link used
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/side-laterals-to-front-raise-"))
     array = doc.css("div.ExDetail")
 
