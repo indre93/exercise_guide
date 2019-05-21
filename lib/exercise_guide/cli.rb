@@ -2,14 +2,13 @@ class ExerciseGuide::CLI
 
   def start
     puts "Welcome to the Exercise Guide App!"
-    puts "Type the muscle that you would like to exercise"
+    puts "Type the number of the muscle that you would like to exercise"
     puts "            -----------------"
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
-    puts ""
     puts "            -----------------"
-    puts ""
     puts "            Exercise results"
+    puts ""
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
     puts "            -----------------"

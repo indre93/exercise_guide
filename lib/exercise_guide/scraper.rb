@@ -34,7 +34,9 @@ class ExerciseGuide::Scraper
 
       array.each do |instructions|
         attributes = {
-          instructions: instructions.css('ol.ExDetail-descriptionSteps').text.strip.gsub(/\s+/,' ')
+        #  title:
+          instructions: instructions.css('.ExDetail-descriptionSteps li').text.strip.gsub(/\s+/,' ')
+        #  video:
         }
         ExerciseGuide::Instructions.new(attributes)
       end
