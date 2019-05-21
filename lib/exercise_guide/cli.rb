@@ -6,21 +6,22 @@ class ExerciseGuide::CLI
     puts "     Welcome to the Exercise Guide App!".colorize(:yellow)
     puts "     ----------------------------------".colorize(:yellow)
     puts ""
+    puts " Type the number of the muscle that you would like to exercise:"
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
     puts ""
-    puts " Type the number of the muscle that you would like to exercise:"
     #gets input and lists exercises based on input
     puts ""
     puts "           ------------------".colorize(:yellow)
     puts "            Exercise results".colorize(:yellow)
     puts "           ------------------".colorize(:yellow)
     puts ""
-    puts "    =========================================".colorize(:red)
+    puts " Type the number of the exercise for instructions:"
+    puts "    ============================================================".colorize(:red)
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
     puts ""
-    puts " Type the number of the exercise for instructions:"
+    puts " Type EXIT to quit or START to start over.".colorize(:red)
     #gets input and shows exercise instructions based in input
     puts ""
     puts "             --------------".colorize(:yellow)
@@ -29,7 +30,17 @@ class ExerciseGuide::CLI
     ExerciseGuide::Scraper.scrape_instructions
     exercise_instructions
     puts ""
+    puts " Type EXIT to quit or START to start over.".colorize(:red)
     puts "            -----------------".colorize(:yellow)
+    puts ""
+  end
+
+  def input(user_input)
+    # user_input = gets.chomp
+  end
+
+  def valid_input?(selection)
+    # selection.to_i.between?(1, 9) #for when user selects body part and exercise
   end
 
   def list_body_parts
@@ -49,7 +60,7 @@ class ExerciseGuide::CLI
       puts " #{index}. #{exercise.exercise_title}"
       puts "    Rating: #{exercise.rating}"
       puts "    #{exercise.equipment_type}"
-      puts "    =========================================".colorize(:red)
+      puts "    ============================================================".colorize(:red)
     end
   end
 

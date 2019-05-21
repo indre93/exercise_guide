@@ -14,14 +14,14 @@ class ExerciseGuide::Scraper
   end
 
   def self.scrape_exercises
-    doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/muscle/neck"))
+    doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/muscle/shoulders"))
     array = doc.css("div.ExResult-row")
 
     array.each do |exercise|
       attributes = {
-        exercise_title: exercise.css(".ExHeading").text.strip,
+        exercise_title: exercise.css(".ExHeading").text.strip.gsub(/\s+/,' '),
         equipment_type: exercise.css(".ExResult-equipmentType").text.strip.gsub(/\s+/,' '),
-        rating: exercise.css(".ExRating-badge").text.strip,
+        rating: exercise.css(".ExRating-badge").text.strip.gsub(/\s+/,' '),
         link: exercise.css("a").attribute("href").value.strip.gsub(/\s+/,' ')
       }
       ExerciseGuide::Exercise.new(attributes)
