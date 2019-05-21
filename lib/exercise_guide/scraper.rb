@@ -28,7 +28,15 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_instructions(exercise) #need to open "exercise.link" instead of below link used
+  # Need to open "exercise.link" instead of below link used
+  # Might be able to delete instructions class (file) and add these attributes to Exercise class to clean this up
+
+  # Instead of hash below do:
+  # title = instructions.css(".ExHeading--h2").text.strip.gsub(/\s+/,' ')
+  # instructions = instructions.css(".ExDetail-descriptionSteps li").text.strip
+  # video = instructions.css('.grid-6').children.css("div").at_css("div").values[3]
+  # Then add attr to attr_accessor in Exercise class
+  def self.scrape_instructions(exercise)
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/side-laterals-to-front-raise-"))
     array = doc.css("div.ExDetail")
 
