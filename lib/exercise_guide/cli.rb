@@ -2,9 +2,9 @@ class ExerciseGuide::CLI
 
   def start
     puts ""
-    puts "     ----------------------------------"
-    puts "     Welcome to the Exercise Guide App!"
-    puts "     ----------------------------------"
+    puts "     ----------------------------------".colorize(:yellow)
+    puts "     Welcome to the Exercise Guide App!".colorize(:yellow)
+    puts "     ----------------------------------".colorize(:yellow)
     puts ""
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
@@ -12,24 +12,24 @@ class ExerciseGuide::CLI
     puts " Type the number of the muscle that you would like to exercise:"
     #gets input and lists exercises based on input
     puts ""
-    puts "           ------------------"
-    puts "            Exercise results"
-    puts "           ------------------"
+    puts "           ------------------".colorize(:yellow)
+    puts "            Exercise results".colorize(:yellow)
+    puts "           ------------------".colorize(:yellow)
     puts ""
-    puts "    ========================================="
+    puts "    =========================================".colorize(:red)
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
     puts ""
     puts " Type the number of the exercise for instructions:"
     #gets input and shows exercise instructions based in input
     puts ""
-    puts "             --------------"
-    puts "              Instructions"
-    puts "             --------------"
+    puts "             --------------".colorize(:yellow)
+    puts "              Instructions".colorize(:yellow)
+    puts "             --------------".colorize(:yellow)
     ExerciseGuide::Scraper.scrape_instructions
     exercise_instructions
     puts ""
-    puts "            -----------------"
+    puts "            -----------------".colorize(:yellow)
   end
 
   def list_body_parts
@@ -49,7 +49,7 @@ class ExerciseGuide::CLI
       puts " #{index}. #{exercise.exercise_title}"
       puts "    Rating: #{exercise.rating}"
       puts "    #{exercise.equipment_type}"
-      puts "    ========================================="
+      puts "    =========================================".colorize(:red)
     end
   end
 
@@ -59,7 +59,7 @@ class ExerciseGuide::CLI
       puts ""
       puts "#{exercise.instructions}"
       puts ""
-      puts "Click on the link to watch this exercise! ===> #{exercise.video}"
+      puts "Click on the link to watch this exercise! ===> #{exercise.video.colorize(:blue)}"
     end
   end
 
