@@ -29,23 +29,21 @@ class ExerciseGuide::Scraper
   end
 
   def self.scrape_instructions
-    doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/lying-face-down-plate-neck-resistance"))
+    doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/side-laterals-to-front-raise-"))
     array = doc.css("div.ExDetail")
 
     array.each do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip.gsub(/\s+/,' '),
         instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip.gsub(/\s+/,' '),
-        video: instructions.css('.grid-6').children.css("div")
+        video: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
       }
       ExerciseGuide::Instructions.new(attributes)
-  #    binding.pry
     end
   end
 
 end
 
-#  video = array.css('.grid-6').children
 # ExerciseGuide::Scraper.scrape_body_parts
 # ExerciseGuide::Scraper.scrape_exercises
 # ExerciseGuide::Scraper.scrape_instructions

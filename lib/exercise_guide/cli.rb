@@ -58,6 +58,8 @@ class ExerciseGuide::CLI
       puts "    #{exercise.title}"
       puts ""
       puts "#{exercise.instructions}"
+      puts ""
+      puts "Click on the link to watch this exercise! ===> #{exercise.video}"
     end
   end
 
