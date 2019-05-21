@@ -16,7 +16,8 @@ class ExerciseGuide::CLI
     puts "            Exercise results".colorize(:yellow)
     puts "           ------------------".colorize(:yellow)
     puts ""
-    puts " Type the number of the exercise for instructions:"
+    puts "    Type the number of the exercise for instructions:"
+    puts ""
     puts "    ============================================================".colorize(:red)
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
