@@ -1,19 +1,32 @@
 class ExerciseGuide::CLI
 
   def start
-    puts "Welcome to the Exercise Guide App!"
-    puts "Type the number of the muscle that you would like to exercise"
+    puts ""
+    puts "            -----------------"
+    puts "            -----------------"
+    puts "     Welcome to the Exercise Guide App!"
+    puts "            -----------------"
     puts "            -----------------"
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
-    puts "            -----------------"
+    puts ""
+    puts "Type the number of the muscle that you would like to exercise:"
+    #gets input and lists exercises based on input
+    puts ""
+    puts "           ------------------"
     puts "            Exercise results"
+    puts "           ------------------"
     puts ""
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
-    puts "            -----------------"
+    puts ""
+    puts "Type the number of the exercise for more details:"
+    #gets input and shows exercise instructions based in input
+    puts ""
+    puts "            ----------------"
     ExerciseGuide::Scraper.scrape_instructions
-    puts "            Instructions"
+    puts "              Instructions"
+    puts "            ----------------"
     exercise_instructions
     puts ""
     puts "            -----------------"
@@ -42,7 +55,7 @@ class ExerciseGuide::CLI
 
   def exercise_instructions
     ExerciseGuide::Instructions.all.each do |exercise|
-      puts "#{exercise.instructions}"
+      puts "  #{exercise.instructions}"
     end
   end
 
