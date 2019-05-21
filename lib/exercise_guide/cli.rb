@@ -7,6 +7,7 @@ class ExerciseGuide::CLI
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
     puts "            -----------------"
+    list_exercises
     #gets input
 
     #puts "Type the exercise for more details"
@@ -14,7 +15,7 @@ class ExerciseGuide::CLI
   end
 
   def list_body_parts
-    ExerciseGuide::BodyPart.all.each.with_index(1) do |body_part, index|
+    ExerciseGuide::BodyPart.all.each.with_index(1) do |body_part, index, rating|
       puts "#{index}. #{body_part.name}"
     end
   end
@@ -22,7 +23,7 @@ class ExerciseGuide::CLI
   def list_exercises
     #lists all exercises for that body part
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
-      puts "#{index}. #{exercise.name}"
+      puts "#{index}. #{exercise.exercise_title} rating #{exercise.rating} #{exercise.equipment_type} #{exercise.link}"
     end
 
   end

@@ -14,23 +14,32 @@ class ExerciseGuide::Scraper
       end
     end
 
-    def self.scrape_exercise_list
-      # shows the list of results based on the muscle selected with equipment type
-
-      # .css("div.ExCategory-results") <== exercise list titles
-      # .css("a").attribute("href").value <== link to exercise
+    def self.scrape_exercises #Need to remove spaces from values for every key
+      doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/muscle/neck"))
+      list = doc.css("div.ExResult-row")
+      list.each do |exercise|
+        hash = {
+          exercise_title: exercise.css(".ExHeading").text,
+          equipment_type: exercise.css(".ExResult-equipmentType").text,
+          rating: exercise.css(".ExRating-badge").text,
+          link: exercise.css("a").attribute("href").value
+        }
+        exercises = ExerciseGuide::Exercise.new(hash)
+      end
     end
 
     def self.scrape_exercise
       # shows exercise selected and includes description
 
-      # .ccs(".ExHeading ExHeading--h3") <== title of exercise
-      # .css(".bb-list--plain").text <== shows equipment type, either "body only" or "machine"
-      # .css("div.grid-8 grid-12-s grid-12-m").text <== Instructions
-      # .css("div.jw-media jw-reset").value || .css("video.jw-media jw-reset").value <== video example or include pics
+      # title of the exercise ==> :exercise_title
+      # equipment type, either "body only" or "other" ==> :equipment_type
+      # rating for exercise ==> :rating
+      # instructions for exercise ==> :instructions
+      # video example or pics of exercise ==>
     end
 
 end
 
 # ExerciseGuide::Scraper.scrape_body_parts
+ ExerciseGuide::Scraper.scrape_exercises
 # ExerciseGuide::Scraper.scrape_exercises
