@@ -6,14 +6,18 @@ class ExerciseGuide::CLI
     puts "            -----------------"
     ExerciseGuide::Scraper.scrape_body_parts
     list_body_parts
+    puts ""
     puts "            -----------------"
+    puts ""
     puts "            Exercise results"
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
-    #gets input
-
-    #puts "Type the exercise for more details"
-    #puts description and link for video
+    puts "            -----------------"
+    ExerciseGuide::Scraper.scrape_instructions
+    puts "            Instructions"
+    exercise_instructions
+    puts ""
+    puts "            -----------------"
   end
 
   def list_body_parts
@@ -22,15 +26,25 @@ class ExerciseGuide::CLI
     end
   end
 
+  def body_part_url
+    ExerciseGuide::BodyPart.all.each do |body_part|
+      puts "#{body_part.body_part_link}"
+    end
+  end
+
   def list_exercises
-    #lists all exercises for that body part
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
       puts "#{index}. #{exercise.exercise_title}"
       puts "   Rating: #{exercise.rating}"
       puts "   #{exercise.equipment_type}"
       puts ""
     end
+  end
 
+  def exercise_instructions
+    ExerciseGuide::Instructions.all.each do |exercise|
+      puts "#{exercise.instructions}"
+    end
   end
 
 
