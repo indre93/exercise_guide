@@ -20,7 +20,7 @@ class ExerciseGuide::CLI
     ExerciseGuide::Scraper.scrape_exercises
     list_exercises
     puts ""
-    puts " Type the number of the exercise for more details:"
+    puts " Type the number of the exercise for instructions:"
     #gets input and shows exercise instructions based in input
     puts ""
     puts "             --------------"
@@ -55,7 +55,9 @@ class ExerciseGuide::CLI
 
   def exercise_instructions
     ExerciseGuide::Instructions.all.each do |exercise|
-      puts "  #{exercise.instructions}"
+      puts "    #{exercise.title}"
+      puts ""
+      puts "#{exercise.instructions}"
     end
   end
 
