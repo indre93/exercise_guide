@@ -23,7 +23,7 @@ class ExerciseGuide::CLI
   def list_exercises
     #lists all exercises for that body part
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
-      puts "#{index}. #{exercise.exercise_title} rating #{exercise.rating} #{exercise.equipment_type} #{exercise.link}"
+      puts "#{index}. #{exercise.exercise_title} #{exercise.rating}"
     end
 
   end
