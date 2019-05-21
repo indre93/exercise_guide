@@ -1,4 +1,5 @@
 class ExerciseGuide::CLI
+  attr_accessor :sorted_body_parts
 
   def start
     puts ""
@@ -29,6 +30,10 @@ class ExerciseGuide::CLI
     puts ""
     puts "==> Type EXIT to quit or START to start over.".colorize(:red)
     puts ""
+  end
+
+  def sort_body_parts
+    @sorted_body_parts = ExerciseGuide::BodyPart.all.sort_by {|muscle| muscle.name}
   end
 
   def list_body_parts
@@ -63,8 +68,17 @@ class ExerciseGuide::CLI
 
   def get_body_part_method
     input = gets.strip
-    if input.to_i.between?(1,18)
+    index = input.to_i - 1 # So we can get a number that is useful in an array
+    if index.between?(0,17)
+      muscle = ExerciseGuide::BodyPart.all[index]
+      puts "#{muscle.name}"
+      list_exercises
         #continue w program
+        #find that body part
+        #scrape - DONE
+        #list exercise that corresponds
+    elsif input == "exit"
+      #allow this method to end
     else
       puts "Oops! invalid input, please try again."
       get_body_part_method
