@@ -19,10 +19,10 @@ class ExerciseGuide::Scraper
 
     array.each do |exercise|
       attributes = {
-        exercise_title: exercise.css(".ExHeading").text.strip.gsub(/\s+/,' '),
+        exercise_title: exercise.css(".ExHeading").text.strip,
         equipment_type: exercise.css(".ExResult-equipmentType").text.strip.gsub(/\s+/,' '),
-        rating: exercise.css(".ExRating-badge").text.strip.gsub(/\s+/,' '),
-        link: exercise.css("a").attribute("href").value.strip.gsub(/\s+/,' ')
+        rating: exercise.css(".ExRating-badge").text.strip,
+        link: exercise.css("a").attribute("href").value.strip
       }
       ExerciseGuide::Exercise.new(attributes)
     end
@@ -35,7 +35,7 @@ class ExerciseGuide::Scraper
     array.each do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip.gsub(/\s+/,' '),
-        instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip.gsub(/\s+/,' '),
+        instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
         video: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
       }
       ExerciseGuide::Instructions.new(attributes)
