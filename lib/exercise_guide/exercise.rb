@@ -18,4 +18,10 @@ class ExerciseGuide::Exercise
   def self.all #class method bc class is keeping track of data we want returned
     @@all
   end
+
+  def exercise_detail
+
+  end
+
+
 end
