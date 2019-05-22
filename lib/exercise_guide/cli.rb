@@ -57,8 +57,8 @@ class ExerciseGuide::CLI
     if index.between?(0,17)
       exercise = ExerciseGuide::Exercise.all[index]
       ExerciseGuide::Scraper.scrape_instructions(exercise)
-      exercise_instructions # list exercises that corresponds
-    elsif input == "exit" # allow this method to end
+      exercise_instructions
+    elsif input == "exit"
     else
       puts "Oops! invalid input, please try again."
       get_exercise_method
