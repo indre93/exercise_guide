@@ -1,5 +1,6 @@
-class ExerciseGuide::BodyPart
-  attr_accessor :name, :body_part_link
+class ExerciseGuide::Muscle
+  attr_accessor :name, :muscle_link
+  attr_reader :exercises
 
   @@all = []
 
@@ -7,6 +8,7 @@ class ExerciseGuide::BodyPart
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
+    @exercises = []
     self.save
   end
 
@@ -18,5 +20,11 @@ class ExerciseGuide::BodyPart
   def self.all #class method bc class is keeping track of data we want returned
     @@all
   end
+
+  def add_exercise(exercise)
+    @exercises << exercise
+    exercise.muscle = self
+  end
+
 
 end

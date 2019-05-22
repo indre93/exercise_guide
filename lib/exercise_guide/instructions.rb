@@ -1,5 +1,5 @@
 class ExerciseGuide::Instructions
-  attr_accessor :instructions, :title, :video
+  attr_accessor :instructions, :video
 
   @@all = []
 
