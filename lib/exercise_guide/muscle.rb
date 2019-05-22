@@ -23,7 +23,7 @@ class ExerciseGuide::Muscle
 
   def add_exercise(exercise)
     @exercises << exercise
-    exercise.muscle = self
+    exercise_title.muscle = self
   end
 
 
