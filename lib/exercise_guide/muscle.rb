@@ -1,10 +1,11 @@
 class ExerciseGuide::Muscle
-  attr_accessor :name, :muscle_link
+  attr_accessor :name, :muscles_link
   attr_reader :exercises
 
   @@all = []
 
-  def initialize(attr_hash) #turns all attributes into objects
+  # turns all attributes into objects
+  def initialize(attr_hash)
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
@@ -12,19 +13,26 @@ class ExerciseGuide::Muscle
     self.save
   end
 
-  def save #returns the exercise instead of all the exercises
+  # returns the exercise instead of all the exercises
+  def save
     @@all << self
     self
   end
 
-  def self.all #class method bc class is keeping track of data we want returned
+  # class method bc class is keeping track of data we want returned
+  def self.all
     @@all
   end
 
-  def add_exercise(exercise)
-    @exercises << exercise
-    exercise_title.muscle = self
+  def self.destroy_all
+    @@all.clear
   end
 
+  # Has many object - relationship
+  # muscle has many exercises
+  def add_exercise(exercise)
+    @exercises << exercise
+    exercise.muscle = self
+  end
 
 end
