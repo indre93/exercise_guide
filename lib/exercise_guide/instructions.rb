@@ -1,6 +1,5 @@
 class ExerciseGuide::Instructions
   attr_accessor :title, :instructions, :video_link
-  attr_reader :exercise
 
   @@all = []
 
@@ -25,13 +24,6 @@ class ExerciseGuide::Instructions
 
   def self.destroy_all
     @@all.clear
-  end
-
-  # Belongs to - relationship
-  # instruction belongs to one exercise
-  def exercise=(exercise)
-    @exercise = exercise
-    self.exercise.exercise_title = exercise
   end
 
 end
