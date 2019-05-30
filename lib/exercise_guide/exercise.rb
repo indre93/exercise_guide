@@ -1,6 +1,5 @@
 class ExerciseGuide::Exercise
-  attr_accessor :exercise_title, :equipment_type, :exercise_rating, :exercises_link
-  attr_reader :muscle, :instruction
+  attr_accessor :exercise_title, :equipment_type, :exercise_rating, :exercises_link, :instructions
 
   @@all = []
 
@@ -25,21 +24,6 @@ class ExerciseGuide::Exercise
 
   def self.destroy_all
     @@all.clear
-  end
-
-  # Belongs to - relationship
-  # exercises belong to a Muscle
-  # adds an exercise to a muscle by calling an #add_song method on an instance of the Artist class
-  def muscle=(muscle)
-    @muscle = muscle
-    muscle.add_exercise(self)
-  end
-
-  # Belongs to - relationship
-  # exercises have one instruction
-  def instruction=(instruction)
-    @instruction = instruction
-    self.instructions.instructions = instruction
   end
 
 end
