@@ -2,9 +2,9 @@ class ExerciseGuide::CLI
 
   def start
     puts ""
-    puts "     ----------------------------------".colorize(:yellow)
-    puts "     Welcome to the Exercise Guide App!".colorize(:yellow)
-    puts "     ----------------------------------".colorize(:yellow)
+    puts "     -----------------------------------".colorize(:yellow)
+    puts "      Welcome to the Exercise Guide App!".colorize(:yellow)
+    puts "     -----------------------------------".colorize(:yellow)
     puts ""
     list_muscles_method
     get_muscle_method # gets input for muscle selected
@@ -14,43 +14,16 @@ class ExerciseGuide::CLI
     end_menu
   end
 
-  def end_menu
-    puts " Type:".colorize(:green)
-    puts " 1. To go back to exercise results to try a different exercise".colorize(:green)
-    puts " 2. To start over".colorize(:green)
-    puts " 3. To Exit".colorize(:green)
-    puts ""
-
-    input = gets.strip
-    index = input.to_i - 1 # So we can get a number that is useful in an array
-    case input
-    when "1"
-      ExerciseGuide::Instructions.destroy_all
-      list_exercises_method
-      get_exercise_method
-      exercise_instructions_method
-      end_menu
-    when "2"
-      ExerciseGuide::Muscle.destroy_all
-      ExerciseGuide::Exercise.destroy_all
-      ExerciseGuide::Instructions.destroy_all
-      ExerciseGuide::CLI.new.start
-    when "3"
-      exit
-    else
-      puts "Oops! invalid input, please try again.".colorize(:red)
-    end_menu
-    end
-  end
-
-  def list_muscles_method # lists all muscles
+  # lists all muscles
+  def list_muscles_method
     ExerciseGuide::Scraper.scrape_muscles
     ExerciseGuide::Muscle.all.each.with_index(1) do |muscle, index|
       puts "#{index}. #{muscle.name}"
     end
   end
 
-  def get_muscle_method # gets input for muscle selected
+  # gets input for muscle selected
+  def get_muscle_method
     puts ""
     puts "==> Please type the number of the body part that you would like to exercise:".colorize(:green)
     puts ""
@@ -65,7 +38,8 @@ class ExerciseGuide::CLI
     end
   end
 
-  def list_exercises_method # list exercises that corresponds to muscle selected
+  # list exercises that corresponds to muscle selected
+  def list_exercises_method
     puts "           ------------------".colorize(:yellow)
     puts "            Exercise results".colorize(:yellow)
     puts "           ------------------".colorize(:yellow)
@@ -78,7 +52,8 @@ class ExerciseGuide::CLI
     end
   end
 
-  def get_exercise_method # gets input for exercise seleted for instructions
+  # gets input for exercise seleted for instructions
+  def get_exercise_method
     puts ""
     puts "==> Please type the number of the exercise for instructions:".colorize(:green)
     puts ""
@@ -104,6 +79,37 @@ class ExerciseGuide::CLI
       puts ""
       puts "Click on the link to watch this exercise! ===> #{exercise.video_link.colorize(:blue)}"
       puts ""
+    end
+  end
+
+  def end_menu
+    puts " Type:".colorize(:green)
+    puts " 1. To go back to exercise results to try a different exercise".colorize(:green)
+    puts " 2. To start over".colorize(:green)
+    puts " 3. To Exit".colorize(:green)
+    puts ""
+
+    input = gets.strip
+    index = input.to_i - 1 # So we can get a number that is useful in an array
+    case input
+    when "1"
+      ExerciseGuide::Instructions.destroy_all
+      list_exercises_method
+      get_exercise_method
+      exercise_instructions_method
+      end_menu
+    when "2"
+      ExerciseGuide::Muscle.destroy_all
+      ExerciseGuide::Exercise.destroy_all
+      ExerciseGuide::Instructions.destroy_all
+      ExerciseGuide::CLI.new.start
+    when "3"
+      puts "See you next time!!"
+      puts ""
+      exit
+    else
+      puts "Oops! invalid input, please try again.".colorize(:red)
+    end_menu
     end
   end
 
