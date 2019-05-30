@@ -1,5 +1,5 @@
 class ExerciseGuide::Instructions
-  attr_accessor :title, :instructions, :video_link
+  attr_accessor :title, :instructions, :video_link, :exercise
 
   @@all = []
 
@@ -8,10 +8,14 @@ class ExerciseGuide::Instructions
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
-    @@all << self
+    self.save
   end
 
-  # class method bc class is keeping track of data we want returned
+  def save
+    @@all << self
+    self
+  end
+
   def self.all
     @@all
   end
