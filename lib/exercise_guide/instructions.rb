@@ -8,13 +8,7 @@ class ExerciseGuide::Instructions
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
-    self.save
-  end
-
-  # returns the exercise instead of all the exercises
-  def save
     @@all << self
-    self
   end
 
   # class method bc class is keeping track of data we want returned

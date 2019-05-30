@@ -1,6 +1,6 @@
 class ExerciseGuide::Muscle
   attr_accessor :name, :muscles_link
-  attr_reader :exercises
+  attr_reader :exercises # has_many relationship
 
   @@all = []
 
@@ -10,13 +10,7 @@ class ExerciseGuide::Muscle
       self.send("#{key}=", value)
     end
     @exercises = []
-    self.save
-  end
-
-  # returns the exercise instead of all the exercises
-  def save
     @@all << self
-    self
   end
 
   # class method bc class is keeping track of data we want returned
@@ -32,9 +26,11 @@ class ExerciseGuide::Muscle
   # strings in array are not frozen
   # if changes are made to one string, the new string is revealed to frozen array
   def exercises
+    raise exercises.inpect
     @exercises.dup.freeze
   end
 
+  # muscle has many exercises
   # is_a? is checking the class of the object
   # if a string does not come from Exercise class, raise error
   # this prevent us from manually pushing an exercise to array

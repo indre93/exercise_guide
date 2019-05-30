@@ -4,7 +4,7 @@ class ExerciseGuide::Scraper
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/"))
     array_of_muscles = doc.css("div.exercise-list li")
 
-    array_of_muscles.each do |muscle|
+    array_of_muscles.collect do |muscle|
       attributes = {
         name: muscle.css("a").children.text,
         muscles_link: "https://www.bodybuilding.com" + muscle.css("a").attribute("href").value
@@ -13,11 +13,11 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_exercises(muscle = ExerciseGuide::Muscle.new)
+  def self.scrape_exercises(muscle)
     doc = Nokogiri::HTML(open(muscle.muscles_link))
     array_of_exercises = doc.css("div.ExResult-row")
 
-    array_of_exercises.each do |exercise|
+    array_of_exercises.collect do |exercise|
       attributes = {
         exercise_title: exercise.css(".ExHeading").text.strip,
         equipment_type: exercise.css(".ExResult-equipmentType").text.strip.gsub(/\s+/,' '),
@@ -28,11 +28,11 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_instructions(exercise = ExerciseGuide::Exercise.new)
+  def self.scrape_instructions(exercise)
     doc = Nokogiri::HTML(open(exercise.exercises_link))
     array = doc.css("div.ExDetail")
 
-    array.each do |instructions|
+    array.collect do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip,
         instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
