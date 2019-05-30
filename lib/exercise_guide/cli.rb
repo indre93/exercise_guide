@@ -81,8 +81,7 @@ class ExerciseGuide::CLI
     puts "             --------------"
 
     ExerciseGuide::Instructions.all.each do |exercise|
-      puts "________#{exercise.title}_________"
-      puts ""
+      puts "-------> #{exercise.title} <-------"
       puts " #{exercise.instructions}"
       puts ""
       puts "Click on the link to watch this exercise! ===> #{exercise.video_link}"
@@ -116,7 +115,7 @@ class ExerciseGuide::CLI
     when "1"
       exercise_results_menu
     when "2"
-      ExerciseGuide::CLI.new.start
+      start_over
     when "3"
       puts "See you next time!!"
       puts ""
