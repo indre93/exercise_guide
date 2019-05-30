@@ -24,7 +24,10 @@ class ExerciseGuide::Scraper
         exercise_rating: exercise.css(".ExRating-badge").text.strip,
         exercises_link: "https://www.bodybuilding.com" + exercise.css("a").attribute("href").value.strip
       }
-      ExerciseGuide::Exercise.new(attributes)
+      exercise = ExerciseGuide::Exercise.new(attributes)
+      # associates Muscle and Exercise / Muscle has many exercises
+      muscle.exercises << exercise unless muscle.exercises.include?(exercise)
+      exercise.muscle = muscle # belongs to relationship
     end
   end
 
@@ -38,7 +41,8 @@ class ExerciseGuide::Scraper
         instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
         video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
       }
-      ExerciseGuide::Instructions.new(attributes)
+      instructions = ExerciseGuide::Instructions.new(attributes)
+      instructions.exercise = exercise # belongs to relationship / Instructions belongs to Exercise
     end
   end
 
