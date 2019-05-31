@@ -53,6 +53,7 @@ class ExerciseGuide::CLI
     puts "           ------------------".colorize(:yellow)
     puts "            Exercise results".colorize(:yellow)
     puts "           ------------------".colorize(:yellow)
+    puts ""
     puts "   *****************************************"
 
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
@@ -124,9 +125,9 @@ class ExerciseGuide::CLI
   def end_menu
     puts ""
     puts " Type:".colorize(:green)
-    puts "       1. To go back to exercise results to try a different exercise".colorize(:green)
-    puts "       2. To start over".colorize(:green)
-    puts "       3. To Exit".colorize(:green)
+    puts "       (1) To go back to exercise results to try a different exercise".colorize(:green)
+    puts "       (2) To start over".colorize(:green)
+    puts "       (3) To Exit".colorize(:green)
     puts ""
 
     case input = gets.strip
