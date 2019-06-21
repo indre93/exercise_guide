@@ -20,7 +20,6 @@ class ExerciseGuide::Scraper
     array_of_exercises.collect do |exercise|
       attributes = {
         exercise_title: exercise.css(".ExHeading").text.strip,
-        equipment_type: exercise.css(".ExResult-equipmentType").text.strip.gsub(/\s+/,' '),
         exercise_rating: exercise.css(".ExRating-badge").text.strip,
         exercises_link: "https://www.bodybuilding.com" + exercise.css("a").attribute("href").value.strip
       }
@@ -38,6 +37,10 @@ class ExerciseGuide::Scraper
     array.collect do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip,
+        type: instructions.css(".ExHeading--h2"),
+        muscle_worked:instructions.css(".ExHeading--h2"),
+        equipment: instructions.css(".ExHeading--h2"),
+        level: instructions.css(".ExHeading--h2"),
         instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
         video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
       }
