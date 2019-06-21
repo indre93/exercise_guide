@@ -1,28 +1,13 @@
 # ExerciseGuide
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/exercise_guide`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the Exercise Guide app!
 
-TODO: Delete this and the text above, and describe your gem
+This command line interface allows you to gain information on different exercise options based on the muscle that you would like to exercise. To make sure the exercise is done properly, this Exercise Guide will also provide you with detailed instructions and as well as a video.
+
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'exercise_guide'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install exercise_guide
-
-## Usage
-
-TODO: Write usage instructions here
+$ gem install exercise_guide
 
 ## Development
 
