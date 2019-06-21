@@ -1,5 +1,5 @@
 class ExerciseGuide::Instructions
-  attr_accessor :title, :type, :muscle_worked, :equipment, :level, :instructions, :video_link, :exercise
+  attr_accessor :title, :type, :muscle_worked, :equipment, :instructions, :video_link, :exercise
 
   @@all = []
 

@@ -37,10 +37,9 @@ class ExerciseGuide::Scraper
     array.collect do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip,
-        type: instructions.css(".ExHeading--h2"),
-        muscle_worked:instructions.css(".ExHeading--h2"),
-        equipment: instructions.css(".ExHeading--h2"),
-        level: instructions.css(".ExHeading--h2"),
+        type: instructions.css(".bb-list--plain a")[0].text.strip,
+        muscle_worked:instructions.css(".bb-list--plain a")[1].text.strip,
+        equipment: instructions.css(".bb-list--plain a")[2].text.strip,
         instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
         video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
       }

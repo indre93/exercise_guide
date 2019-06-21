@@ -54,11 +54,11 @@ class ExerciseGuide::CLI
     puts "            Exercise results".colorize(:yellow)
     puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
     puts ""
-    puts "     ------------------------------------------------------------------".colorize(:yellow)
+    puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
 
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
       puts " (#{index}) Name: #{exercise.exercise_title.colorize(:cyan)} / Rating: #{exercise.exercise_rating.colorize(:cyan)} "
-      puts "     ------------------------------------------------------------------".colorize(:yellow)
+      puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
     end
   end
 
@@ -94,14 +94,13 @@ class ExerciseGuide::CLI
 
     ExerciseGuide::Instructions.all.each do |exercise|
       puts ""
-      puts "-------> #{exercise.title.colorize(:cyan)} <-------"
+      puts "---------> #{exercise.title.colorize(:cyan)} <---------"
       puts ""
-      puts "#{exercise.type}"
-      puts "#{exercise.muscle_worked}"
-      puts "#{exercise.equipment}"
-      puts "#{exercise.level}"
+      puts "Type: #{exercise.type.colorize(:cyan)}"
+      puts "Main muscle worked: #{exercise.muscle_worked.colorize(:cyan)}"
+      puts "Equipment type: #{exercise.equipment.colorize(:cyan)}"
       puts ""
-      puts "#{exercise.instructions}"
+      puts " #{exercise.instructions}"
       puts ""
       puts "Click on the link to watch this exercise! --->".colorize(:yellow) + " #{exercise.video_link.colorize(:blue)}"
     end
@@ -109,7 +108,7 @@ class ExerciseGuide::CLI
 
   # ending message
   def end_app
-    puts "See you next time!!"
+    puts " See you next time!!".colorize(:yellow)
     puts ""
     exit
   end
