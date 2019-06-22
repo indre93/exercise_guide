@@ -10,7 +10,7 @@ $  gem install exercise_guide
 
 ## Usage
 
-to execute the program simply type:
+Type the below and follow the on screen prompts.
 
 $  ./bin/exercise_guide
 
@@ -27,7 +27,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/indre9
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the ExerciseGuide project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/'capable-acrobat-8797'/exercise_guide/blob/master/CODE_OF_CONDUCT.md).

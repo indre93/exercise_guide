@@ -24,9 +24,6 @@ class ExerciseGuide::Scraper
         exercises_link: "https://www.bodybuilding.com" + exercise.css("a").attribute("href").value.strip
       }
       exercise = ExerciseGuide::Exercise.new(attributes)
-      # associates Muscle and Exercise / Muscle has many exercises
-      muscle.exercises << exercise unless muscle.exercises.include?(exercise)
-      exercise.muscle = muscle # belongs to relationship
     end
   end
 
@@ -44,7 +41,6 @@ class ExerciseGuide::Scraper
         instructions: instructions.css(".ExDetail-descriptionSteps").children.map {|step| step.text} # returns array to list instructions instead of paragraph
       }
       instructions = ExerciseGuide::Instructions.new(attributes)
-      instructions.exercise = exercise # belongs to relationship / Instructions belongs to Exercise
     end
   end
 

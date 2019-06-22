@@ -1,6 +1,5 @@
 class ExerciseGuide::Muscle
   attr_accessor :name, :muscles_link
-  attr_reader :exercises # has many relationship
 
   @@all = []
 
