@@ -12,7 +12,17 @@ class ExerciseGuide::CLI
     end_menu
   end
 
-  # lists all muscles
+  def start_title
+    puts ""
+    puts "                     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts "                         Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
+    puts "                     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts ""
+    puts "______________===========================================================______________".colorize(:red)
+    puts "                Learn different exercises based on the selected muscle!".colorize(:yellow)
+    puts "______________===========================================================______________".colorize(:red)
+  end
+
   def list_muscles
     ExerciseGuide::Scraper.scrape_muscles
     ExerciseGuide::Muscle.all.each.with_index(1) do |muscle, index|
@@ -21,7 +31,6 @@ class ExerciseGuide::CLI
     end
   end
 
-  # gets input for muscle selected
   def get_muscle
     puts ""
     puts ""
@@ -45,7 +54,6 @@ class ExerciseGuide::CLI
     end
   end
 
-  # list exercises that corresponds to muscle selected
   def list_exercises
     exercise_results_title
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
@@ -54,7 +62,6 @@ class ExerciseGuide::CLI
     end
   end
 
-  # gets input for exercise seleted for instructions
   def get_exercise
     puts ""
     puts ""
@@ -83,7 +90,6 @@ class ExerciseGuide::CLI
     end
   end
 
-  # puts instructions for exercise selected
   def exercise_instructions
     instructions_title
     ExerciseGuide::Instructions.all.each do |exercise|
@@ -99,39 +105,27 @@ class ExerciseGuide::CLI
     end
   end
 
-    def end_menu
-      puts ""
-      puts ""
-      puts "___________________________________________=============================================___________________________________________".colorize(:red)
-      puts "                                              Type: (1) To try a different exercise".colorize(:yellow)
-      puts "                                                    (2) To start over".colorize(:yellow)
-      puts "                                                    (3) To exit".colorize(:yellow)
-      puts "___________________________________________=============================================___________________________________________".colorize(:red)
-      puts ""
+  def end_menu
+    puts ""
+    puts ""
+    puts "___________________________________________=============================================___________________________________________".colorize(:red)
+    puts "                                              Type: (1) To try a different exercise".colorize(:yellow)
+    puts "                                                    (2) To start over".colorize(:yellow)
+    puts "                                                    (3) To exit".colorize(:yellow)
+    puts "___________________________________________=============================================___________________________________________".colorize(:red)
+    puts ""
 
-      case input = gets.strip
-      when "1"
-        exercise_results_menu
-      when "2"
-        start_over
-      when "3"
-        exit_message
-      else
-        puts " Oops! invalid input, please try again.".colorize(:red)
-        end_menu
-      end
+    case input = gets.strip
+    when "1"
+      exercise_results_menu
+    when "2"
+      start_over
+    when "3"
+      exit_message
+    else
+      puts " Oops! invalid input, please try again.".colorize(:red)
+      end_menu
     end
-
-  def start_title
-    puts ""
-    puts "                     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts "                         Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
-    puts "                     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts ""
-    puts "______________===========================================================______________".colorize(:red)
-    puts "                Learn different exercises based on the selected muscle!".colorize(:yellow)
-    puts "______________===========================================================______________".colorize(:red)
-
   end
 
   def exercise_results_title
