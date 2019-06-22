@@ -40,8 +40,7 @@ class ExerciseGuide::CLI
     elsif index <= ExerciseGuide::Muscle.all.size && index > 0
       muscle = ExerciseGuide::Muscle.all[index - 1]
       ExerciseGuide::Scraper.scrape_exercises(muscle)
-      puts ""
-      puts "You have selected #{muscle.name.colorize(:cyan).underline}"
+      puts "You have selected #{muscle.name.colorize(:cyan).underline}..."
       puts ""
     else
       puts "Oops! invalid input, please try again.".colorize(:red)

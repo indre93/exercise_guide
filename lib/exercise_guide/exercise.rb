@@ -4,11 +4,10 @@ class ExerciseGuide::Exercise
   @@all = []
 
   # turns all attributes into objects
-  def initialize(attr_hash, muscle = nil)
+  def initialize(attr_hash)
     attr_hash.each do |key, value|
       self.send("#{key}=", value)
     end
-    self.muscle = muscle
     self.save
   end
 
