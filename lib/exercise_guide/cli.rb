@@ -5,11 +5,10 @@ class ExerciseGuide::CLI
   def start
     puts ""
     puts "     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts "         Welcome to the Exercise Guide App!".colorize(:yellow)
+    puts "         Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
     puts "     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
     puts ""
-    puts " Learn different exercises based on the muscle selected!".colorize(:yellow)
-    puts ""
+    puts " Learn different exercises based on the selected muscle!".colorize(:yellow)
     list_muscles
     get_muscle
     list_exercises
@@ -22,7 +21,8 @@ class ExerciseGuide::CLI
   def list_muscles
     ExerciseGuide::Scraper.scrape_muscles
     ExerciseGuide::Muscle.all.each.with_index(1) do |muscle, index|
-      puts " (#{index}) #{muscle.name.colorize(:cyan)}"
+      puts ""
+      puts " (#{index}) ".colorize(:yellow) + "#{muscle.name.colorize(:cyan)}"
     end
   end
 
@@ -30,7 +30,7 @@ class ExerciseGuide::CLI
   def get_muscle
     puts ""
     puts "---> Please type the number of the muscle that you would like to exercise:".colorize(:yellow)
-    puts "---> Or type EXIT".colorize(:red)
+    puts "---> Or type ".colorize(:red) + "EXIT".colorize(:red).underline
     puts ""
     input = gets.strip
     index = input.to_i
@@ -51,13 +51,13 @@ class ExerciseGuide::CLI
   def list_exercises
     puts ""
     puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
-    puts "            Exercise results".colorize(:yellow)
+    puts "            Exercise results".upcase.colorize(:yellow)
     puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
     puts ""
     puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
 
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
-      puts " (#{index}) Name: #{exercise.exercise_title.colorize(:cyan)} / Rating: #{exercise.exercise_rating.colorize(:cyan)} "
+      puts " (#{index}) ".colorize(:yellow) + "#{exercise.exercise_title.colorize(:cyan)} / Rating: #{exercise.exercise_rating.colorize(:cyan)} "
       puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
     end
   end
@@ -66,15 +66,18 @@ class ExerciseGuide::CLI
   def get_exercise
     puts ""
     puts "---> Please type the number of the exercise for instructions:".colorize(:yellow)
-    puts "---> Or type BACK to select a different muscle".colorize(:yellow)
-    puts "---> Or type EXIT".colorize(:red)
+    puts "---> Or type ".colorize(:yellow) + "BACK".colorize(:yellow).underline + " to select a different muscle".colorize(:yellow)
+    puts "---> Or type ".colorize(:red) + "EXIT".colorize(:red).underline
+    puts ""
     input = gets.strip
     index = input.to_i
 
     if input == "exit" || input == "EXIT"
       end_app
     elsif input == "back" || input == "BACK"
+      puts ""
       start_over
+      puts ""
     elsif index <= ExerciseGuide::Exercise.all.size && index > 0
       exercise = ExerciseGuide::Exercise.all[index - 1]
       ExerciseGuide::Scraper.scrape_instructions(exercise)
@@ -88,7 +91,7 @@ class ExerciseGuide::CLI
   def exercise_instructions
     puts ""
     puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
-    puts "              Instructions".colorize(:yellow)
+    puts "              Instructions".upcase.colorize(:yellow)
     puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
 
     ExerciseGuide::Instructions.all.each do |exercise|
