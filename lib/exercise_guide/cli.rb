@@ -8,9 +8,8 @@ class ExerciseGuide::CLI
     puts "         Welcome to the Exercise Guide App!".colorize(:yellow)
     puts "     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
     puts ""
-    puts " Learn different exercises based on the muscle you would like to work on!".colorize(:yellow)
+    puts " Learn different exercises based on the muscle selected!".colorize(:yellow)
     puts ""
-
     list_muscles
     get_muscle
     list_exercises
@@ -33,15 +32,17 @@ class ExerciseGuide::CLI
     puts "---> Please type the number of the muscle that you would like to exercise:".colorize(:yellow)
     puts "---> Or type EXIT".colorize(:red)
     puts ""
-
     input = gets.strip
-    index = input.to_i - 1 # So we can get a number that is useful in an array
+    index = input.to_i
 
     if input == "exit" || input == "EXIT"
       end_app
-    elsif index <= ExerciseGuide::Muscle.all.size
-      muscle = ExerciseGuide::Muscle.all[index]
+    elsif index <= ExerciseGuide::Muscle.all.size && index > 0
+      muscle = ExerciseGuide::Muscle.all[index - 1]
       ExerciseGuide::Scraper.scrape_exercises(muscle)
+      puts ""
+      puts "You have selected #{muscle.name.colorize(:cyan).underline}"
+      puts ""
     else
       puts "Oops! invalid input, please try again.".colorize(:red)
       get_muscle
@@ -69,16 +70,15 @@ class ExerciseGuide::CLI
     puts "---> Or type BACK to select a different muscle".colorize(:yellow)
     puts "---> Or type EXIT".colorize(:red)
     puts ""
-
     input = gets.strip
-    index = input.to_i - 1 # So we can get a number that is useful in an array
+    index = input.to_i
 
     if input == "exit" || input == "EXIT"
       end_app
     elsif input == "back" || input == "BACK"
       start_over
-    elsif index <= ExerciseGuide::Exercise.all.size
-      exercise = ExerciseGuide::Exercise.all[index]
+    elsif index <= ExerciseGuide::Exercise.all.size && index > 0
+      exercise = ExerciseGuide::Exercise.all[index - 1]
       ExerciseGuide::Scraper.scrape_instructions(exercise)
     else
       puts "Oops! invalid input, please try again.".colorize(:red)
@@ -106,28 +106,6 @@ class ExerciseGuide::CLI
     end
   end
 
-  # ending message
-  def end_app
-    puts " Goodbye!".colorize(:yellow)
-    puts ""
-    exit
-  end
-
-  def start_over
-    ExerciseGuide::Muscle.destroy_all
-    ExerciseGuide::Exercise.destroy_all
-    ExerciseGuide::Instructions.destroy_all
-    start
-  end
-
-  def exercise_results_menu
-    ExerciseGuide::Instructions.destroy_all
-    list_exercises
-    get_exercise
-    exercise_instructions
-    end_menu
-  end
-
   def end_menu
     puts ""
     puts ""
@@ -147,6 +125,28 @@ class ExerciseGuide::CLI
       puts "Oops! invalid input, please try again.".colorize(:red)
       end_menu
     end
+  end
+
+  def exercise_results_menu
+    ExerciseGuide::Instructions.destroy_all
+    list_exercises
+    get_exercise
+    exercise_instructions
+    end_menu
+  end
+
+  def start_over
+    ExerciseGuide::Muscle.destroy_all
+    ExerciseGuide::Exercise.destroy_all
+    ExerciseGuide::Instructions.destroy_all
+    start
+  end
+
+  # ending message
+  def end_app
+    puts " Goodbye!".colorize(:yellow)
+    puts ""
+    exit
   end
 
 end

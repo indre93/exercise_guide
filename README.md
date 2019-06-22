@@ -4,17 +4,15 @@ Welcome to the Exercise Guide app!
 
 This command line interface allows you to gain information on different exercise options based on the muscle that you would like to exercise. To make sure the exercise is done properly, this Exercise Guide will also provide you with detailed instructions and as well as a video.
 
-
 ## Installation
 
-$ gem install exercise_guide
-
+$  gem install exercise_guide
 
 ## Usage
 
 to execute the program simply type:
 
-$ ./bin/exercise_guide
+$  ./bin/exercise_guide
 
 ## Development
 
@@ -24,7 +22,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/'capable-acrobat-8797'/exercise_guide. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/indre93/exercise_guide. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
