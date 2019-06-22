@@ -31,7 +31,7 @@ class ExerciseGuide::CLI
   def get_muscle
     puts ""
     puts "---> Please type the number of the muscle that you would like to exercise:".colorize(:yellow)
-    puts "---> Or type EXIT to exit".colorize(:red)
+    puts "---> Or type EXIT".colorize(:red)
     puts ""
 
     input = gets.strip
@@ -67,7 +67,7 @@ class ExerciseGuide::CLI
     puts ""
     puts "---> Please type the number of the exercise for instructions:".colorize(:yellow)
     puts "---> Or type BACK to select a different muscle".colorize(:yellow)
-    puts "---> Or type EXIT to exit".colorize(:red)
+    puts "---> Or type EXIT".colorize(:red)
     puts ""
 
     input = gets.strip
@@ -102,13 +102,13 @@ class ExerciseGuide::CLI
       puts ""
       puts " #{exercise.instructions}"
       puts ""
-      puts "Click on the link to watch this exercise! --->".colorize(:yellow) + " #{exercise.video_link.colorize(:blue)}"
+      puts "Click on the link to watch this exercise! --->".colorize(:cyan) + " #{exercise.video_link.colorize(:blue)}"
     end
   end
 
   # ending message
   def end_app
-    puts " See you next time!!".colorize(:yellow)
+    puts " Goodbye!".colorize(:yellow)
     puts ""
     exit
   end
@@ -130,9 +130,10 @@ class ExerciseGuide::CLI
 
   def end_menu
     puts ""
-    puts "Type: (1) To go back to exercise results to try a different exercise".colorize(:green)
-    puts "      (2) To start over".colorize(:green)
-    puts "      (3) To exit".colorize(:green)
+    puts ""
+    puts "Type: (1) To go back to exercise results to try a different exercise".colorize(:yellow)
+    puts "      (2) To start over".colorize(:yellow)
+    puts "      (3) To exit".colorize(:yellow)
     puts ""
 
     case input = gets.strip
