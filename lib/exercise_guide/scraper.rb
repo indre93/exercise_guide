@@ -38,7 +38,7 @@ class ExerciseGuide::Scraper
         muscle_worked:instructions.css(".bb-list--plain a")[1].text.strip,
         equipment: instructions.css(".bb-list--plain a")[2].text.strip,
         video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3],
-        instructions: instructions.css(".ExDetail-descriptionSteps").children.map {|step| step.text} # returns array to list instructions instead of paragraph
+        instructions: instructions.css(".ExDetail-descriptionSteps").children.map {|step| step.text.strip} # returns array to list instructions instead of paragraph
       }
       instructions = ExerciseGuide::Instructions.new(attributes)
     end
