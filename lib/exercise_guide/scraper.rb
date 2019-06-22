@@ -40,8 +40,8 @@ class ExerciseGuide::Scraper
         type: instructions.css(".bb-list--plain a")[0].text.strip,
         muscle_worked:instructions.css(".bb-list--plain a")[1].text.strip,
         equipment: instructions.css(".bb-list--plain a")[2].text.strip,
-        instructions: instructions.css(".ExDetail-descriptionSteps li").text.strip,
-        video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3]
+        video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3],
+        instructions: instructions.css(".ExDetail-descriptionSteps").children.map {|step| step.text}
       }
       instructions = ExerciseGuide::Instructions.new(attributes)
       instructions.exercise = exercise # belongs to relationship / Instructions belongs to Exercise

@@ -98,22 +98,22 @@ class ExerciseGuide::CLI
       puts ""
       puts "---------> #{exercise.title.colorize(:cyan)} <---------"
       puts ""
-      puts "Type: #{exercise.type.colorize(:cyan)}"
-      puts "Main muscle worked: #{exercise.muscle_worked.colorize(:cyan)}"
-      puts "Equipment type: #{exercise.equipment.colorize(:cyan)}"
+      puts " Type: #{exercise.type.colorize(:cyan)}"
+      puts " Main muscle worked: #{exercise.muscle_worked.colorize(:cyan)}"
+      puts " Equipment type: #{exercise.equipment.colorize(:cyan)}"
       puts ""
-      puts " #{exercise.instructions}"
+      exercise.instructions.each.with_index(1) {|step, index| puts " #{index}.#{step.colorize(:cyan)}"}
       puts ""
-      puts "Click on the link to watch this exercise! --->".colorize(:cyan) + " #{exercise.video_link.colorize(:blue)}"
+      puts " Click on the link to watch this exercise! --->".colorize(:yellow) + " #{exercise.video_link.colorize(:blue)}"
     end
   end
 
   def end_menu
     puts ""
     puts ""
-    puts "Type: (1) To go back to exercise results to try a different exercise".colorize(:yellow)
-    puts "      (2) To start over".colorize(:yellow)
-    puts "      (3) To exit".colorize(:yellow)
+    puts " Type: (1) To go back to exercise results to try a different exercise".colorize(:yellow)
+    puts "       (2) To start over".colorize(:yellow)
+    puts "       (3) To exit".colorize(:yellow)
     puts ""
 
     case input = gets.strip
