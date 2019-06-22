@@ -3,13 +3,7 @@ require 'colorize'
 class ExerciseGuide::CLI
 
   def start
-    puts ""
-    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts "                   Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
-    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts ""
-    puts "         Learn different exercises based on the selected muscle!".colorize(:yellow)
-    puts ""
+    start_title
     list_muscles
     get_muscle
     list_exercises
@@ -38,7 +32,7 @@ class ExerciseGuide::CLI
     index = input.to_i
 
     if input == "exit" || input == "EXIT"
-      end_app
+      exit_message
     elsif index <= ExerciseGuide::Muscle.all.size && index > 0
       muscle = ExerciseGuide::Muscle.all[index - 1]
       ExerciseGuide::Scraper.scrape_exercises(muscle)
@@ -51,16 +45,10 @@ class ExerciseGuide::CLI
 
   # list exercises that corresponds to muscle selected
   def list_exercises
-    puts ""
-    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
-    puts "                      Exercise results".upcase.colorize(:yellow)
-    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
-    puts ""
-    puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
-
+    exercise_results_title
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
       puts " (#{index}) ".colorize(:yellow) + "#{exercise.exercise_title.colorize(:cyan)} / Rating: #{exercise.exercise_rating.colorize(:cyan)} "
-      puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
+      puts "     ----------------------------------------------------------------------------".colorize(:yellow)
     end
   end
 
@@ -75,7 +63,7 @@ class ExerciseGuide::CLI
     index = input.to_i
 
     if input == "exit" || input == "EXIT"
-      end_app
+      exit_message
     elsif input == "back" || input == "BACK"
       puts ""
       start_over
@@ -91,18 +79,13 @@ class ExerciseGuide::CLI
 
   # puts instructions for exercise selected
   def exercise_instructions
-    puts ""
-    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
-    puts "                        Instructions".upcase.colorize(:yellow)
-    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
-
+    instructions_title
     ExerciseGuide::Instructions.all.each do |exercise|
       puts ""
-      puts "---------> #{exercise.title.colorize(:cyan)} <---------"
-      puts ""
+      puts " Exercise Name: #{exercise.title.colorize(:cyan)}"
+      puts " Main Muscle Worked: #{exercise.muscle_worked.colorize(:cyan)}"
       puts " Type: #{exercise.type.colorize(:cyan)}"
-      puts " Main muscle worked: #{exercise.muscle_worked.colorize(:cyan)}"
-      puts " Equipment type: #{exercise.equipment.colorize(:cyan)}"
+      puts " Equipment Type: #{exercise.equipment.colorize(:cyan)}"
       puts ""
       exercise.instructions.each.with_index(1) {|steps, index| puts " #{index}.#{steps.colorize(:cyan)}"}
       puts ""
@@ -110,25 +93,51 @@ class ExerciseGuide::CLI
     end
   end
 
-  def end_menu
-    puts ""
-    puts ""
-    puts " Type: (1) To go back to exercise results to try a different exercise".colorize(:yellow)
-    puts "       (2) To start over".colorize(:yellow)
-    puts "       (3) To exit".colorize(:yellow)
-    puts ""
+    def end_menu
+      puts ""
+      puts ""
+      puts " Type: (1) To go back to exercise results to try a different exercise".colorize(:yellow)
+      puts "       (2) To start over".colorize(:yellow)
+      puts "       (3) To exit".colorize(:yellow)
+      puts ""
 
-    case input = gets.strip
-    when "1"
-      exercise_results_menu
-    when "2"
-      start_over
-    when "3"
-      end_app
-    else
-      puts "Oops! invalid input, please try again.".colorize(:red)
-      end_menu
+      case input = gets.strip
+      when "1"
+        exercise_results_menu
+      when "2"
+        start_over
+      when "3"
+        exit_message
+      else
+        puts "Oops! invalid input, please try again.".colorize(:red)
+        end_menu
+      end
     end
+
+  def start_title
+    puts ""
+    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts "                   Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
+    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts ""
+    puts "         Learn different exercises based on the selected muscle!".colorize(:yellow)
+    puts ""
+  end
+
+  def exercise_results_title
+    puts ""
+    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
+    puts "                      Exercise results".upcase.colorize(:yellow)
+    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
+    puts ""
+    puts "     ----------------------------------------------------------------------------".colorize(:yellow)
+  end
+
+  def instructions_title
+    puts ""
+    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
+    puts "                        Instructions".upcase.colorize(:yellow)
+    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
   end
 
   def exercise_results_menu
@@ -146,9 +155,8 @@ class ExerciseGuide::CLI
     start
   end
 
-  # ending message
-  def end_app
-    puts " Goodbye!".colorize(:yellow)
+  def exit_message
+    puts " Goodbye!!".upcase.colorize(:red)
     puts ""
     exit
   end
