@@ -41,7 +41,6 @@ class ExerciseGuide::CLI
       muscle = ExerciseGuide::Muscle.all[index - 1]
       ExerciseGuide::Scraper.scrape_exercises(muscle)
       puts "You have selected #{muscle.name.colorize(:cyan).underline}..."
-      puts ""
     else
       puts "Oops! invalid input, please try again.".colorize(:red)
       get_muscle
@@ -50,6 +49,7 @@ class ExerciseGuide::CLI
 
   # list exercises that corresponds to muscle selected
   def list_exercises
+    puts ""
     puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
     puts "            Exercise results".colorize(:yellow)
     puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
@@ -68,7 +68,6 @@ class ExerciseGuide::CLI
     puts "---> Please type the number of the exercise for instructions:".colorize(:yellow)
     puts "---> Or type BACK to select a different muscle".colorize(:yellow)
     puts "---> Or type EXIT".colorize(:red)
-    puts ""
     input = gets.strip
     index = input.to_i
 
@@ -87,6 +86,7 @@ class ExerciseGuide::CLI
 
   # puts instructions for exercise selected
   def exercise_instructions
+    puts ""
     puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
     puts "              Instructions".colorize(:yellow)
     puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
