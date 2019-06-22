@@ -4,11 +4,12 @@ class ExerciseGuide::CLI
 
   def start
     puts ""
-    puts "     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
-    puts "         Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
-    puts "     " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
+    puts "                   Welcome to the Exercise Guide App!".upcase.colorize(:yellow)
+    puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
     puts ""
-    puts " Learn different exercises based on the selected muscle!".colorize(:yellow)
+    puts "         Learn different exercises based on the selected muscle!".colorize(:yellow)
+    puts ""
     list_muscles
     get_muscle
     list_exercises
@@ -28,6 +29,7 @@ class ExerciseGuide::CLI
 
   # gets input for muscle selected
   def get_muscle
+    puts ""
     puts ""
     puts "---> Please type the number of the muscle that you would like to exercise:".colorize(:yellow)
     puts "---> Or type ".colorize(:red) + "EXIT".colorize(:red).underline
@@ -50,9 +52,9 @@ class ExerciseGuide::CLI
   # list exercises that corresponds to muscle selected
   def list_exercises
     puts ""
-    puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
-    puts "            Exercise results".upcase.colorize(:yellow)
-    puts "          " + "--------------------".colorize(:color => :black, :background => :yellow)
+    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
+    puts "                      Exercise results".upcase.colorize(:yellow)
+    puts "                    " + "--------------------".colorize(:color => :black, :background => :yellow)
     puts ""
     puts "     ---------------------------------------------------------------------------------".colorize(:yellow)
 
@@ -90,9 +92,9 @@ class ExerciseGuide::CLI
   # puts instructions for exercise selected
   def exercise_instructions
     puts ""
-    puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
-    puts "              Instructions".upcase.colorize(:yellow)
-    puts "           " + "------------------".colorize(:color => :black, :background => :yellow)
+    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
+    puts "                        Instructions".upcase.colorize(:yellow)
+    puts "                     " + "------------------".colorize(:color => :black, :background => :yellow)
 
     ExerciseGuide::Instructions.all.each do |exercise|
       puts ""
@@ -102,7 +104,7 @@ class ExerciseGuide::CLI
       puts " Main muscle worked: #{exercise.muscle_worked.colorize(:cyan)}"
       puts " Equipment type: #{exercise.equipment.colorize(:cyan)}"
       puts ""
-      exercise.instructions.each.with_index(1) {|step, index| puts " #{index}.#{step.colorize(:cyan)}"}
+      exercise.instructions.each.with_index(1) {|steps, index| puts " #{index}.#{steps.colorize(:cyan)}"}
       puts ""
       puts " Click on the link to watch this exercise! --->".colorize(:yellow) + " #{exercise.video_link.colorize(:blue)}"
     end
