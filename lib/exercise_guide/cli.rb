@@ -24,9 +24,8 @@ class ExerciseGuide::CLI
   # gets input for muscle selected
   def get_muscle
     puts ""
-    puts ""
     puts "---> Please type the number of the muscle that you would like to exercise:".colorize(:yellow)
-    puts "---> Or type ".colorize(:red) + "EXIT".colorize(:red).underline
+    puts "---> Or type EXIT".colorize(:red)
     puts ""
     input = gets.strip
     index = input.to_i
@@ -36,9 +35,9 @@ class ExerciseGuide::CLI
     elsif index <= ExerciseGuide::Muscle.all.size && index > 0
       muscle = ExerciseGuide::Muscle.all[index - 1]
       ExerciseGuide::Scraper.scrape_exercises(muscle)
-      puts "You have selected #{muscle.name.colorize(:cyan).underline}..."
+      puts " You have selected #{muscle.name.colorize(:cyan).underline}..."
     else
-      puts "Oops! invalid input, please try again.".colorize(:red)
+      puts " Oops! invalid input, please try again.".colorize(:red)
       get_muscle
     end
   end
@@ -56,8 +55,8 @@ class ExerciseGuide::CLI
   def get_exercise
     puts ""
     puts "---> Please type the number of the exercise for instructions:".colorize(:yellow)
-    puts "---> Or type ".colorize(:yellow) + "BACK".colorize(:yellow).underline + " to select a different muscle".colorize(:yellow)
-    puts "---> Or type ".colorize(:red) + "EXIT".colorize(:red).underline
+    puts "---> Or type BACK to select a different muscle".colorize(:yellow)
+    puts "---> Or type EXIT".colorize(:red)
     puts ""
     input = gets.strip
     index = input.to_i
@@ -72,7 +71,7 @@ class ExerciseGuide::CLI
       exercise = ExerciseGuide::Exercise.all[index - 1]
       ExerciseGuide::Scraper.scrape_instructions(exercise)
     else
-      puts "Oops! invalid input, please try again.".colorize(:red)
+      puts " Oops! invalid input, please try again.".colorize(:red)
       get_exercise
     end
   end
@@ -109,7 +108,7 @@ class ExerciseGuide::CLI
       when "3"
         exit_message
       else
-        puts "Oops! invalid input, please try again.".colorize(:red)
+        puts " Oops! invalid input, please try again.".colorize(:red)
         end_menu
       end
     end
@@ -121,7 +120,6 @@ class ExerciseGuide::CLI
     puts "               " + "-------------------------------------------".colorize(:color => :black, :background => :yellow)
     puts ""
     puts "         Learn different exercises based on the selected muscle!".colorize(:yellow)
-    puts ""
   end
 
   def exercise_results_title
