@@ -108,11 +108,11 @@ class ExerciseGuide::CLI
   def end_menu
     puts ""
     puts ""
-    puts "___________________________________________=============================================___________________________________________".colorize(:red)
-    puts "                                              Type: (1) To try a different exercise".colorize(:yellow)
-    puts "                                                    (2) To start over".colorize(:yellow)
-    puts "                                                    (3) To exit".colorize(:yellow)
-    puts "___________________________________________=============================================___________________________________________".colorize(:red)
+    puts "_________________________________=============================================_________________________________".colorize(:red)
+    puts "                                    Type: (1) To try a different exercise".colorize(:yellow)
+    puts "                                          (2) To start over".colorize(:yellow)
+    puts "                                          (3) To exit".colorize(:yellow)
+    puts "_________________________________=============================================_________________________________".colorize(:red)
     puts ""
 
     case input = gets.strip
