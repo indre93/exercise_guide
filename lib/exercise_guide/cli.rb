@@ -24,7 +24,7 @@ class ExerciseGuide::CLI
   end
 
   def list_muscles
-    ExerciseGuide::Scraper.scrape_muscles
+    ExerciseGuide::Scraper.new.scrape_muscles if ExerciseGuide::Muscle.all.empty?
     ExerciseGuide::Muscle.all.each.with_index(1) do |muscle, index|
       puts ""
       puts " (#{index}) ".colorize(:yellow) + "#{muscle.name.colorize(:cyan)}"
@@ -46,7 +46,7 @@ class ExerciseGuide::CLI
       exit_message
     elsif index <= ExerciseGuide::Muscle.all.size && index > 0
       muscle = ExerciseGuide::Muscle.all[index - 1]
-      ExerciseGuide::Scraper.scrape_exercises(muscle)
+      ExerciseGuide::Scraper.new.scrape_exercises(muscle) if ExerciseGuide::Exercise.all.empty?
       puts "You have selected: " + "(#{index}) #{muscle.name}...".colorize(:blue)
     else
       puts " Oops! invalid input, please try again.".colorize(:red)
@@ -56,6 +56,7 @@ class ExerciseGuide::CLI
 
   def list_exercises
     exercise_results_title
+
     ExerciseGuide::Exercise.all.each.with_index(1) do |exercise, index|
       puts " (#{index}) ".colorize(:yellow) + "#{exercise.exercise_title.colorize(:cyan)} / Rating: #{exercise.exercise_rating.colorize(:cyan)} "
       puts "     ----------------------------------------------------------------------------".colorize(:yellow)
@@ -71,6 +72,7 @@ class ExerciseGuide::CLI
     puts "---> Or type EXIT".colorize(:yellow)
     puts "     ========================================================".colorize(:red)
     puts ""
+
     input = gets.strip
     index = input.to_i
 
@@ -78,11 +80,11 @@ class ExerciseGuide::CLI
       exit_message
     elsif input == "back" || input == "BACK"
       puts ""
-      start_over
+      start
       puts ""
     elsif index <= ExerciseGuide::Exercise.all.size && index > 0
       exercise = ExerciseGuide::Exercise.all[index - 1]
-      ExerciseGuide::Scraper.scrape_instructions(exercise)
+      ExerciseGuide::Scraper.new.scrape_instructions(exercise) if ExerciseGuide::Instructions.all.empty?
       puts "You have selected: " + "(#{index}) #{exercise.exercise_title}...".colorize(:blue)
     else
       puts " Oops! invalid input, please try again.".colorize(:red)
@@ -92,6 +94,7 @@ class ExerciseGuide::CLI
 
   def exercise_instructions
     instructions_title
+
     ExerciseGuide::Instructions.all.each do |exercise|
       puts ""
       puts " Exercise Name: #{exercise.title.colorize(:cyan)}"
@@ -119,7 +122,7 @@ class ExerciseGuide::CLI
     when "1"
       exercise_results_menu
     when "2"
-      start_over
+      start
     when "3"
       exit_message
     else
@@ -145,18 +148,10 @@ class ExerciseGuide::CLI
   end
 
   def exercise_results_menu
-    ExerciseGuide::Instructions.destroy_all
     list_exercises
     get_exercise
     exercise_instructions
     end_menu
-  end
-
-  def start_over
-    ExerciseGuide::Muscle.destroy_all
-    ExerciseGuide::Exercise.destroy_all
-    ExerciseGuide::Instructions.destroy_all
-    start
   end
 
   def exit_message

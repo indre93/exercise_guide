@@ -1,6 +1,5 @@
 class ExerciseGuide::Instructions
-  extend Memorable::ClassMethods
-  include Memorable::InstanceMethods
+  include Memorable
 
   attr_accessor :title, :type, :muscle_worked, :equipment, :video_link, :instructions
 
@@ -9,5 +8,4 @@ class ExerciseGuide::Instructions
   def self.all
     @@all
   end
-
 end

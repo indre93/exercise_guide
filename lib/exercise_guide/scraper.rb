@@ -1,10 +1,10 @@
 class ExerciseGuide::Scraper
 
-  def self.scrape_muscles
+  def scrape_muscles
     doc = Nokogiri::HTML(open("https://www.bodybuilding.com/exercises/"))
-    array_of_muscles = doc.css("div.exercise-list li")
+    muscles_array = doc.css("div.exercise-list li")
 
-    array_of_muscles.each do |muscle|
+    muscles_array.each do |muscle|
       attributes = {
         name: muscle.css("a").children.text,
         muscles_link: "https://www.bodybuilding.com" + muscle.css("a").attribute("href").value
@@ -13,25 +13,25 @@ class ExerciseGuide::Scraper
     end
   end
 
-  def self.scrape_exercises(muscle)
+  def scrape_exercises(muscle)
     doc = Nokogiri::HTML(open(muscle.muscles_link))
-    array_of_exercises = doc.css("div.ExResult-row")
+    exercises_array = doc.css("div.ExResult-row")
 
-    array_of_exercises.each do |exercise|
+    exercises_array.each do |exercise|
       attributes = {
         exercise_title: exercise.css(".ExHeading").text.strip,
         exercise_rating: exercise.css(".ExRating-badge").text.strip,
         exercises_link: "https://www.bodybuilding.com" + exercise.css("a").attribute("href").value.strip
       }
-      exercise = ExerciseGuide::Exercise.new(attributes)
+      ExerciseGuide::Exercise.new(attributes)
     end
   end
 
-  def self.scrape_instructions(exercise)
+  def scrape_instructions(exercise)
     doc = Nokogiri::HTML(open(exercise.exercises_link))
-    array = doc.css("div.ExDetail")
+    instruction_details = doc.css("div.ExDetail")
 
-    array.each do |instructions|
+    instruction_details.each do |instructions|
       attributes = {
         title: instructions.css(".ExHeading--h2").text.strip,
         type: instructions.css(".bb-list--plain a")[0].text.strip,
@@ -40,7 +40,7 @@ class ExerciseGuide::Scraper
         video_link: instructions.css('.grid-6').children.css("div").at_css("div").values[3],
         instructions: instructions.css(".ExDetail-descriptionSteps").children.map {|step| step.text.strip} # returns array to list instructions instead of paragraph
       }
-      instructions = ExerciseGuide::Instructions.new(attributes)
+      ExerciseGuide::Instructions.new(attributes)
     end
   end
 

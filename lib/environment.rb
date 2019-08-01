@@ -3,7 +3,6 @@ require 'pry'
 require 'open-uri'
 
 require_relative "exercise_guide/concerns/memorable"
-
 require_relative "exercise_guide/version.rb"
 require_relative "exercise_guide/scraper.rb"
 require_relative "exercise_guide/muscle.rb"
