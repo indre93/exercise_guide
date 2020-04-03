@@ -36,7 +36,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.0)
   exercise_guide!
-  nokogiri (>= 1.10.8)
+  nokogiri
   pry
   rake (>= 12.3.3)
   rspec
